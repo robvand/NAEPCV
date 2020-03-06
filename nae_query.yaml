@@ -16,6 +16,6 @@
     nae_prechange:
         <<: *nae_login
         ag_name: apic-amslab
-        name: AddBD_Bla2
+        name: AddBD
         state: query
     delegate_to: localhost

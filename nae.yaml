@@ -14,12 +14,12 @@
     nae_prechange:
         <<: *nae_login
         ag_name: apic-amslab
-        name: AddBD_Bla2
+        name: AddBD
         changes: |
             [{
                   "bd_change": {
                      "action": "ADD",
-                     "dn": "uni/tn-robvand/BD-BD-2",
+                     "dn": "uni/tn-robvand/BD-BD-1",
                      "optimize_wan_bandwidth": "no",
                      "type": "regular",
                      "arp_flood": "no",
@@ -36,7 +36,7 @@
                  {
                    "network_subnet_change": {
                      "action": "ADD",
-                     "dn": "uni/tn-robvand/BD-BD-3/subnet-10.0.11.1/24",
+                     "dn": "uni/tn-robvand/BD-BD-1/subnet-10.0.12.1/24",
                      "scope": "private",
                      "make_this_primary_ip_address": "no",
                      "treat_as_virtual_ip_address": "no",
