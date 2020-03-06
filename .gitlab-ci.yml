@@ -8,7 +8,7 @@ create-pcv:
   stage: verify
   script:
     - ansible-playbook nae.yaml -i hosts -i inventory -vvv
-    - sleep 200
+    - sleep 190
 
 query-pcv:
   stage: query
