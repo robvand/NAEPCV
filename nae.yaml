@@ -19,7 +19,7 @@
             [{
                   "bd_change": {
                      "action": "ADD",
-                     "dn": "uni/tn-robvand/BD-BD-1",
+                     "dn": "uni/tn-robvand/BD-BD-CORONA",
                      "optimize_wan_bandwidth": "no",
                      "type": "regular",
                      "arp_flood": "no",
@@ -36,7 +36,7 @@
                  {
                    "network_subnet_change": {
                      "action": "ADD",
-                     "dn": "uni/tn-robvand/BD-BD-1/subnet-10.0.12.1/24",
+                     "dn": "uni/tn-robvand/BD-BD-CORONA/subnet-10.0.12.1/24",
                      "scope": "private",
                      "make_this_primary_ip_address": "no",
                      "treat_as_virtual_ip_address": "no",

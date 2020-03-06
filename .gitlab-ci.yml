@@ -15,7 +15,7 @@ query-pcv:
   script:
     - ansible-playbook nae_query.yaml -i hosts -i inventory -vvv
 
-ansible-aci:
+build-aci:
   stage: build
   script:
     - ansible-playbook aci.yaml -i hosts
