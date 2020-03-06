@@ -1,0 +1,23 @@
+- name: Prepare the ACI environment
+  hosts: apic-amslab.cisco.com
+  connection: local
+  gather_facts: no
+  vars_files:
+    - vars.yaml
+  vars:
+    aci_login: &aci_login
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password:  "{{ password }}"
+      validate_certs:  "{{ validate_certs }}"
+
+  tasks:
+    - name: Create a subnet for a BD
+      aci_bd_subnet:
+        <<: *aci_login
+        tenant: "{{ tenant }}"
+        bd: "{{ bd }}"
+        gateway: "{{ gateway }}"
+        mask: " {{ mask }} "
+        state: present
+      delegate_to: localhost

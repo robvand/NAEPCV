@@ -1,0 +1,9 @@
+hostname: 10.61.124.32
+username: admin
+password: C!sco12345
+validate_certs: no
+tenant: robvand
+vrf: vrf-cicd
+bd: bd-2
+gateway: 10.0.11.1/24
+mask: 24

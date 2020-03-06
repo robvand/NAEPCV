@@ -5,6 +5,8 @@
 bin
 include
 lib
+ansible.cfg
+inventory
 
 # User-specific stuff
 .idea/**/workspace.xml

@@ -19,7 +19,7 @@
             [{
                   "bd_change": {
                      "action": "ADD",
-                     "dn": "uni/tn-robvand/BD-BD-3",
+                     "dn": "uni/tn-robvand/BD-BD-2",
                      "optimize_wan_bandwidth": "no",
                      "type": "regular",
                      "arp_flood": "no",
