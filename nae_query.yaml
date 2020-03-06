@@ -1,0 +1,21 @@
+- name: NAE pre-change analysis
+  hosts: candid-amslab.cisco.com
+  connection: local
+  gather_facts: no
+  vars:
+    nae_login: &nae_login
+      hostname: candid-amslab.cisco.com
+      username: admin
+      password: C!sco1234567890
+      port: 443
+      validate_certs: no
+  tasks:
+
+#query
+  - name: Query the PCR
+    nae_prechange:
+        <<: *nae_login
+        ag_name: apic-amslab
+        name: AddBD_Bla2
+        state: query
+    delegate_to: localhost
