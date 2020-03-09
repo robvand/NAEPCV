@@ -18,6 +18,7 @@ stages:
 test-webex:
   stage: test-webex
   script:
+    - chmod + x webex.sh
     - ./webex.sh
 
 create-pcv:
