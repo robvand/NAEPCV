@@ -47,7 +47,7 @@ query-pcv:
     - >-
         curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
         Result from PCV query are $pcv
-        ", "files=output_$CI_PIPELINE_ID.txt"}' https://api.ciscospark.com/v1/messages
+        ", --form "files=output_$CI_PIPELINE_ID.txt"}' https://api.ciscospark.com/v1/messages
 
 build-aci:
   stage: build
