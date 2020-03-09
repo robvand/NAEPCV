@@ -46,7 +46,7 @@ query-pcv:
     - echo $pcv
     - >-
       curl --request POST \
-      --header "Authorization: Bearer $bearer" \
+      --header "Authorization: Bearer '"$bearer"'" \
       --form "files=output_$CI_PIPELINE_ID.txt" \
       --form "roomId=$roomId" \
       --form "text=pipeline results" \
