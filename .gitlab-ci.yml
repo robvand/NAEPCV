@@ -9,11 +9,11 @@ variables:
 
 stages:
   - test-webex
-#  - verify
-#  - query
-#  - build
-#  - test
-#  - notify
+  - verify
+  - query
+  - build
+  - test
+  - notify
 
 test-webex:
   stage: test-webex
