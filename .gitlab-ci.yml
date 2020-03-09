@@ -25,7 +25,7 @@ test-webex:
         https://api.ciscospark.com/v1/messages
 
 create-pcv:
-  stage: verifyß
+  stage: verify
   script:
     - ansible-playbook nae.yaml -i hosts -i inventory -vvv
     - sleep 5
