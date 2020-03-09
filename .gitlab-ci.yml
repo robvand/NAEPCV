@@ -19,7 +19,9 @@ test-webex:
   stage: test-webex
   script:
     - >-
-        curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"hi"}' https://api.ciscospark.com/v1/messages
+        curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":
+      hello
+      "}' https://api.ciscospark.com/v1/messages
 
 create-pcv:
   stage: verify
@@ -36,7 +38,7 @@ query-pcv:
   script:
     - >-
       curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-      Starting pipeline stage: '"${CI_JOB_STAGE}"' and '"${CI_COMMIT_MESSAGE}"'
+      Starting pipeline stage: '"${CI_JOB_STAGE}"'
       "}' https://api.ciscospark.com/v1/messages
     - ansible-playbook nae_query.yaml -i hosts -vvv > output_$CI_PIPELINE_ID.txt
     - pcv=$(cat output_$CI_PIPELINE_ID.txt)
