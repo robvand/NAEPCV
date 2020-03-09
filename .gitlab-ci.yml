@@ -25,7 +25,7 @@ create-pcv:
   stage: verify
   script:
     - ansible-playbook nae.yaml -i hosts -i inventory -vvv
-    - sleep 5
+    - sleep 1
 
 query-pcv:
   stage: query
@@ -47,8 +47,8 @@ notify_failure:
   when: on_failure
   script:
     - >-
-        curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"'"${CI_COMMIT_REF_SLUG}"'
-        godmode '"${CI_PIPELINE_URL}"'
+        curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
+        Failure on pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"'
         "}' https://api.ciscospark.com/v1/messages
 
 #- /usr/local/bin/python build_notifier.py ${NOTIFIER_TOKEN} ${CI_COMMIT_REF_SLUG} failure "Pipeline for **${CI_COMMIT_REF_SLUG} - ${BUILD_TAG}** failed check status at ${CI_PIPELINE_URL}"
@@ -57,4 +57,7 @@ notify_success:
   stage: notify
   when: on_success
   script:
-    - /usr/local/bin/python build_notifier.py ${NOTIFIER_TOKEN} ${CI_COMMIT_REF_SLUG} success "Pipeline for **${CI_COMMIT_REF_SLUG} - ${BUILD_TAG}** succeeded check status at ${CI_PIPELINE_URL}"
+    - >-
+        curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
+        Success on pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"'
+        "}' https://api.ciscospark.com/v1/messages
