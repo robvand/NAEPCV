@@ -44,6 +44,7 @@ query-pcv:
   after_script:
     - echo "hoi"
     - pcv=$(cat output_$CI_PIPELINE_ID.txt)
+    - echo $pcv
     - >-
         curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
         Result from PCV query are $pcv
