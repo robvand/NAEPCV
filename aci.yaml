@@ -12,6 +12,14 @@
       validate_certs:  "{{ validate_certs }}"
 
   tasks:
+    - name: Create BDs
+      aci_bd:
+        <<: *aci_login
+        tenant: "{{ tenant }}"
+        bd: "{{ item }}"
+        vrf: "{{ vrf }}"
+      with_items:
+        - "{{ bd }}"
     - name: Create a subnet for a BD
       aci_bd_subnet:
         <<: *aci_login

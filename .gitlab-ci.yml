@@ -1,14 +1,34 @@
+# Pipeline for ACI changes that contains PCVs.
+
+variables:
+  botId: "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Y2NThiYjZjLTVkMzUtNDNkNC05YmJmLTAzOTBlNTJiNDMzZA"
+  bearer: "ODc5ZDVmZGUtM2Q0Yy00MzM3LTk2YmItYjlhYzZkNTZjN2VmYTk3ZjdlY2ItOTEx_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f"
+  botName: "gitlab-amslab"
+  botUsername: "gitlab-amslab@webex.bot"
+  roomId: "Y2lzY29zcGFyazovL3VzL1JPT00vYmMzNGIyZjAtNjFmYS0xMWVhLWI4NTgtMTM5NTgxNTJhYmNl"
+
 stages:
-  - verify
-  - query
-  - build
-  - test
+  - test-webex
+#  - verify
+#  - query
+#  - build
+#  - test
+#  - notify
+
+test-webex:
+  stage: test-webex
+  script:
+    - curl -H "Content-Type: application/json" \
+        -H 'Authorization: Bearer ODc5ZDVmZGUtM2Q0Yy00MzM3LTk2YmItYjlhYzZkNTZjN2VmYTk3ZjdlY2ItOTEx_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f' \
+        -i -v -X POST \
+        -d "{ \"roomId\": \"Y2lzY29zcGFyazovL3VzL1JPT00vYmMzNGIyZjAtNjFmYS0xMWVhLWI4NTgtMTM5NTgxNTJhYmNl\", \"text\": \"hi\" }" \
+        https://api.ciscospark.com/v1/messages
 
 create-pcv:
   stage: verify
   script:
     - ansible-playbook nae.yaml -i hosts -i inventory -vvv
-    - sleep 190
+    - sleep 5
 
 query-pcv:
   stage: query
@@ -24,3 +44,15 @@ test:
   stage: test
   script:
     - echo "docker test ci run on local mac"
+
+notify_failure:
+  stage: notify
+  when: on_failure
+  script:
+    - /usr/local/bin/python build_notifier.py ${NOTIFIER_TOKEN} ${CI_COMMIT_REF_SLUG} failure "Pipeline for **${CI_COMMIT_REF_SLUG} - ${BUILD_TAG}** failed check status at ${CI_PIPELINE_URL}"
+
+notify_success:
+  stage: notify
+  when: on_success
+  script:
+    - /usr/local/bin/python build_notifier.py ${NOTIFIER_TOKEN} ${CI_COMMIT_REF_SLUG} success "Pipeline for **${CI_COMMIT_REF_SLUG} - ${BUILD_TAG}** succeeded check status at ${CI_PIPELINE_URL}"
