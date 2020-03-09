@@ -8,19 +8,19 @@ variables:
   roomId: "Y2lzY29zcGFyazovL3VzL1JPT00vYmMzNGIyZjAtNjFmYS0xMWVhLWI4NTgtMTM5NTgxNTJhYmNl"
 
 stages:
-  - test-webex
+  - init-webex
   - verify
   - query
   - build
   - test
   - notify
 
-test-webex:
-  stage: test-webex
+init-webex:
+  stage: init-webex
   script:
     - >-
       curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-      Hello, starting pipeline: '"${CI_PROJECT_NAME}"' change: '"${CI_PIPELINE_ID}"'
+      Hello, starting pipeline: '"${CI_PROJECT_NAME}"' - change: #'"${CI_PIPELINE_ID}"'
       "}' https://api.ciscospark.com/v1/messages
 
 create-pcv:
@@ -41,6 +41,8 @@ query-pcv:
       Starting pipeline stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
       "}' https://api.ciscospark.com/v1/messages
     - ansible-playbook nae_query.yaml -i hosts -vvv > output_$CI_PIPELINE_ID.txt
+  after_script:
+    - echo "hoi"
     - pcv=$(cat output_$CI_PIPELINE_ID.txt)
     - >-
         curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
