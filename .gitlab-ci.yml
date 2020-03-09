@@ -25,7 +25,7 @@ create-pcv:
   script:
     - >-
       curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-      Starting pipeline stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
+      Starting stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
       "}' https://api.ciscospark.com/v1/messages
     - ansible-playbook nae.yaml -i hosts -i inventory -vvv
     - sleep 1
@@ -35,7 +35,7 @@ query-pcv:
   script:
     - >-
       curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-      Starting pipeline stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
+      Starting stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
       "}' https://api.ciscospark.com/v1/messages
     - ansible-playbook nae_query.yaml -i hosts -vvv > output_$CI_PIPELINE_ID.txt
   after_script:
@@ -47,7 +47,7 @@ build-aci:
   script:
     - >-
       curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-      Starting pipeline stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
+      Starting stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
       "}' https://api.ciscospark.com/v1/messages
     - ansible-playbook aci.yaml -i hosts
 
@@ -61,15 +61,15 @@ notify_failure:
   when: on_failure
   script:
     - >-
-        curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-        We have aborted pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"' \n Please see the report file above for an explanation.
-        "}' https://api.ciscospark.com/v1/messages
+      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
+      We have aborted pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"' \n Please see the report file above for an explanation.\n ################### \n\n
+      "}' https://api.ciscospark.com/v1/messages
 
 notify_success:
   stage: notify
   when: on_success
   script:
     - >-
-        curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-        Success on pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"' \n Please see the report file above for more details.
-        "}' https://api.ciscospark.com/v1/messages
+      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
+      Success on pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"' \n Please see the report file above for more details.\n ################### \n\n
+      "}' https://api.ciscospark.com/v1/messages
