@@ -42,12 +42,11 @@ query-pcv:
       "}' https://api.ciscospark.com/v1/messages
     - ansible-playbook nae_query.yaml -i hosts -vvv > output_$CI_PIPELINE_ID.txt
   after_script:
-    - echo "hoi"
     - pcv=$(cat output_$CI_PIPELINE_ID.txt)
     - echo $pcv
     - >-
         curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-        Result from PCV query are '"${pcv}"'
+        Result from PCV query are $pcv
         "}' https://api.ciscospark.com/v1/messages
 
 build-aci:
