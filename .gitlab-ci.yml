@@ -1,10 +1,7 @@
 # Pipeline for ACI changes that contains PCVs.
 
 variables:
-  botId: "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Y2NThiYjZjLTVkMzUtNDNkNC05YmJmLTAzOTBlNTJiNDMzZA"
   bearer: "ODc5ZDVmZGUtM2Q0Yy00MzM3LTk2YmItYjlhYzZkNTZjN2VmYTk3ZjdlY2ItOTEx_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f"
-  botName: "gitlab-amslab"
-  botUsername: "gitlab-amslab@webex.bot"
   roomId: "Y2lzY29zcGFyazovL3VzL1JPT00vYmMzNGIyZjAtNjFmYS0xMWVhLWI4NTgtMTM5NTgxNTJhYmNl"
 
 stages:
@@ -20,7 +17,7 @@ init-webex:
   script:
     - >-
       curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-      Hello, we are kicking off starting pipeline: '"${CI_PROJECT_NAME}"' - change: #'"${CI_PIPELINE_ID}"'
+      Hello, we are kicking off pipeline: '"${CI_PROJECT_NAME}"' - change: #'"${CI_PIPELINE_ID}"'
       "}' https://api.ciscospark.com/v1/messages
 
 create-pcv:
@@ -48,6 +45,10 @@ query-pcv:
 build-aci:
   stage: build
   script:
+     - >-
+      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
+      Starting pipeline stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
+      "}' https://api.ciscospark.com/v1/messages
     - ansible-playbook aci.yaml -i hosts
 
 test:
@@ -61,10 +62,8 @@ notify_failure:
   script:
     - >-
         curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-        Failure on pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"' \n Please see the report file above for an explanation.
+        We have aborted pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"' \n Please see the report file above for an explanation.
         "}' https://api.ciscospark.com/v1/messages
-
-#- /usr/local/bin/python build_notifier.py ${NOTIFIER_TOKEN} ${CI_COMMIT_REF_SLUG} failure "Pipeline for **${CI_COMMIT_REF_SLUG} - ${BUILD_TAG}** failed check status at ${CI_PIPELINE_URL}"
 
 notify_success:
   stage: notify
