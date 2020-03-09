@@ -20,7 +20,7 @@ test-webex:
   script:
     - >-
         curl -H "Content-Type: application/json"
-        -H 'Authorization: Bearer "'"$botId"'"'
+        -H 'Authorization: Bearer '"$botId"''
         -i -v -X POST -d "{ \"roomId\": \"Y2lzY29zcGFyazovL3VzL1JPT00vYmMzNGIyZjAtNjFmYS0xMWVhLWI4NTgtMTM5NTgxNTJhYmNl\", \"text\": \"hi\" }"
         https://api.ciscospark.com/v1/messages
 
