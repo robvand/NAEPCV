@@ -20,7 +20,7 @@ init-webex:
   script:
     - >-
       curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-      Hello, we are kicking off starting pipeline: '"${CI_PROJECT_NAME}"' - change: #'"${CI_PIPELINE_ID}"' with the latest commit of '"${CI_COMMIT_DESCRIPTION}"' '"${CI_COMMIT_MESSAGE}"'
+      Hello, we are kicking off starting pipeline: '"${CI_PROJECT_NAME}"' - change: #'"${CI_PIPELINE_ID}"' with the latest commit of '"${CI_COMMIT_MESSAGE}"'
       "}' https://api.ciscospark.com/v1/messages
 
 create-pcv:
