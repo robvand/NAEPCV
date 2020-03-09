@@ -46,8 +46,8 @@ query-pcv:
     - echo $pcv
     - >-
       curl --request POST \
-      --header "Authorization: Bearer '"$bearer"'" \
-      --form "files=output_'"$CI_PIPELINE_ID"'.txt" \
+      --header "Authorization: Bearer $bearer" \
+      --form "files=output_$CI_PIPELINE_ID.txt" \
       --form "roomId=$roomId" \
       --form "text=pipeline results" \
       https://api.ciscospark.com/v1/messages
