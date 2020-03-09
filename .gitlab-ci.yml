@@ -30,7 +30,7 @@ create-pcv:
 query-pcv:
   stage: query
   script:
-    - ansible-playbook nae_query.yaml -i hosts -i inventory -vvv > output_$CI_PIPELINE_ID.txt
+    - ansible-playbook nae_query.yaml -i hosts -vvv > output_$CI_PIPELINE_ID.txt
     - pcv=$(cat output_$CI_PIPELINE_ID.txt)
     - >-
         curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
