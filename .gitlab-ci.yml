@@ -22,11 +22,12 @@ init-webex:
 
 create-pcv:
   stage: verify
-  script:
+  before_script:
     - >-
       curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
       Starting stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
       "}' https://api.ciscospark.com/v1/messages
+  script:
     - ansible-playbook nae.yaml -i hosts -i inventory -vvv
     - sleep 1
 
