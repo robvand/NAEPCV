@@ -22,7 +22,7 @@ try:
 except JSONDecodeError as e:
     print(e)
     output_dict = {"key":"value"}
-text = "Description: {0},\nMessage: {1}".format(output_dict['Later Epoch Smart Events'][0]['epoch2_details']['description'],
+text = " Description: {0},\n Message: {1}".format(output_dict['Later Epoch Smart Events'][0]['epoch2_details']['description'],
                                                   output_dict['msg'])
 
 print(output_dict)
