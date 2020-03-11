@@ -33,22 +33,24 @@ create-pcv:
 
 query-pcv:
   stage: query
-  script:
+  before_script:
     - >-
       curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
       Starting stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
       "}' https://api.ciscospark.com/v1/messages
+  script:
     - ansible-playbook nae_query.yaml -i hosts -vvv > output_$CI_PIPELINE_ID.txt
   after_script:
     - python3 parser.py
 
 build-aci:
   stage: build
-  script:
+  before_script:
     - >-
       curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
       Starting stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
       "}' https://api.ciscospark.com/v1/messages
+  script:
     - ansible-playbook aci.yaml -i hosts
 
 test:
