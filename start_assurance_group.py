@@ -39,10 +39,20 @@ for data in json_dict['value']['data']:
 print(uuid)
 
 # Start assurance group
-url = "https://candid-amslab.cisco.com/api/v1/config-services/assured-networks/aci-fabric/{0}/start-analysis".format(uuid)
-data = json.dumps({
-"iterations": 1
-})
+url = "https://candid-amslab.cisco.com/nae/api/v1/config-services/analysis"
+data = '''
+{
+  "interval": 900,
+  "type": "AUTO",
+  "assurance_group_list": [
+    {
+      "uuid": "''' + uuid + '''"
+
+    }
+  ],
+  "offline_analysis_list": [],
+  "iterations": 1
+}'''
 response = s.post(url, headers=headers, data=data, verify=False)
 print(response.status_code)
 print(url)
