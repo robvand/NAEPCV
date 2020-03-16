@@ -28,6 +28,6 @@ text = " Description: {0},\n Message: {1}".format(output_dict['Later Epoch Smart
 print(output_dict)
 
 url = 'https://api.ciscospark.com/v1/messages'
-payload = {'roomId' : roomId, 'text': text}
+payload = {'roomId': roomId, 'text': text}
 headers = {'Authorization': bearer}
 res = requests.post(url, data=payload, headers=headers)

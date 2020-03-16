@@ -1,5 +1,5 @@
 - name: Prepare the ACI environment
-  hosts: apic-amslab.cisco.com
+  hosts: 10.61.124.32
   connection: local
   gather_facts: no
   vars_files:

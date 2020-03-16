@@ -10,7 +10,7 @@
       port: 443
       validate_certs: no
   tasks:
-  - name: Add-new Pre-change nalysis by specifying change list manually
+  - name: Add-new Pre-change analysis by specifying change list manually
     nae_prechange:
         <<: *nae_login
         ag_name: apic-amslab
