@@ -52,5 +52,5 @@
       <<: *nae_login
       ag_name: apic-amslab
       name: AddBD
-      state: query
+      state: verify
     delegate_to: localhost
