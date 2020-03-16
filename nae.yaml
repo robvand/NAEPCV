@@ -46,3 +46,11 @@
 
         state: present
     delegate_to: localhost
+
+  - name: Query the PCR
+    nae_prechange:
+      <<: *nae_login
+      ag_name: apic-amslab
+      name: AddBD
+      state: query
+    delegate_to: localhost

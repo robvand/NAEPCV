@@ -39,14 +39,15 @@ for data in json_dict['value']['data']:
 print(uuid)
 
 # Start assurance group
-url = "https://candid-amslab.cisco.com/nae/api/v1/config-services/analysis"
+url = "https://candid-amslab.cisco.com/nae/api/v1/config-services/analysis/737ea995-98a30e27-78a3-4b57-8059-da1b77506135/stop"
 data = '''
 {
   "interval": 900,
+  running_status: "STOP_REQUESTED",
   "type": "AUTO",
   "assurance_group_list": [
     {
-      "uuid": "''' + uuid + '''"
+      "uuid": 
 
     }
   ],
