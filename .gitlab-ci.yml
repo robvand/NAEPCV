@@ -28,8 +28,6 @@ query:
       "}' https://api.ciscospark.com/v1/messages
   script:
     - ansible-playbook naefail.yaml -i hosts -vvv > output_$CI_PIPELINE_ID.txt
-  after_script:
-    - python3 parser.py
 
 build-aci:
   stage: build
