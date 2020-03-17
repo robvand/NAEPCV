@@ -22,11 +22,11 @@ try:
 except JSONDecodeError as e:
     print(e)
     output_dict = {"key":"value"}
-text = " Description: {0}".format(output_dict['Later Epoch Smart Events'][0]['epoch2_details']['description'])
+#text = " Description: {0}".format(output_dict['Later Epoch Smart Events'][0]['epoch2_details']['description'])
 
 print(output_dict)
 
 url = 'https://api.ciscospark.com/v1/messages'
-payload = {'roomId': roomId, 'text': text}
+payload = {'roomId': roomId, 'text': "hi"}
 headers = {'Authorization': bearer}
 res = requests.post(url, data=payload, headers=headers)

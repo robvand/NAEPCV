@@ -3,6 +3,8 @@
   connection: local
   gather_facts: no
   vars:
+    room_id: Y2lzY29zcGFyazovL3VzL1JPT00vYmMzNGIyZjAtNjFmYS0xMWVhLWI4NTgtMTM5NTgxNTJhYmNl
+    token: ODc5ZDVmZGUtM2Q0Yy00MzM3LTk2YmItYjlhYzZkNTZjN2VmYTk3ZjdlY2ItOTEx_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f
     nae_login: &nae_login
       hostname: candid-amslab.cisco.com
       username: admin
@@ -11,11 +13,19 @@
       validate_certs: no
   tasks:
 
-#query
   - name: Query the PCR
     nae_prechange:
-        <<: *nae_login
-        ag_name: apic-amslab
-        name: AddBD
-        state: query
+      <<: *nae_login
+      ag_name: apic-amslab
+      name: AddContract
+      state: verify
     delegate_to: localhost
+    register: results
+
+  - name: Cisco Spark - Text Message to a Room
+    cisco_spark:
+      recipient_type: roomId
+      recipient_id: "{{ room_id }}"
+      message_type: markdown
+      personal_token: "{{ token }}"
+      message: "{{results.msg}}"
