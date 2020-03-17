@@ -10,10 +10,10 @@ bearer = 'Bearer ODc5ZDVmZGUtM2Q0Yy00MzM3LTk2YmItYjlhYzZkNTZjN2VmYTk3ZjdlY2ItOTE
 
 CI_PIPELINE_ID = os.getenv('CI_PIPELINE_ID')
 
-pcv_output = open('output_'+CI_PIPELINE_ID+".txt", 'r').read()
+pcv_output = open('output_101.txt', 'r').read()
 new_string = re.sub("\[\{", "", pcv_output)
 
-parsed_input_string = pcv_output[(pcv_output.find("FAILED! => ") + len("FAILED! => ")): pcv_output.find("PLAY RECAP") - 2]
+parsed_input_string = pcv_output[(pcv_output.find("Later Epoch Smart Events") - 7): pcv_output.find("PLAY RECAP") - 39]
 try:
     output_dict = json.loads(parsed_input_string)
     epoch_details = output_dict['Later Epoch Smart Events'][0]['epoch2_details']
@@ -22,8 +22,7 @@ try:
 except JSONDecodeError as e:
     print(e)
     output_dict = {"key":"value"}
-text = " Description: {0},\n Message: {1}".format(output_dict['Later Epoch Smart Events'][0]['epoch2_details']['description'],
-                                                  output_dict['msg'])
+text = " Description: {0}".format(output_dict['Later Epoch Smart Events'][0]['epoch2_details']['description'])
 
 print(output_dict)
 
