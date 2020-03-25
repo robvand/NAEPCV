@@ -13,7 +13,7 @@
   - name: Add-new Pre-change analysis by specifying change list manually
     nae_prechange:
         <<: *nae_login
-        ag_name: apic-amslab
+        ag_name: amslab
         name: AddContract
         changes: |
             [{
@@ -36,7 +36,7 @@
   - name: Query the PCR
     nae_prechange:
       <<: *nae_login
-      ag_name: apic-amslab
+      ag_name: amslab
       name: AddContract
       state: verify
     delegate_to: localhost
