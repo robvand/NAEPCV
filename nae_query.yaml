@@ -11,8 +11,8 @@
       password: C!sco1234567890
       port: 443
       validate_certs: no
-  tasks:
 
+  tasks:
   - name: Query the PCR
     nae_prechange:
       <<: *nae_login
