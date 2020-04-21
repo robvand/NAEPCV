@@ -15,7 +15,7 @@ init-webex:
   stage: init-webex
   script:
     - >-
-      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
+      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "markdown":"
       ###################\n Hello Rob, we are kicking off pipeline: '"${CI_PROJECT_NAME}"' - change: #'"${CI_PIPELINE_ID}"'
       "}' https://api.ciscospark.com/v1/messages
 
@@ -23,7 +23,7 @@ query:
   stage: query
   before_script:
     - >-
-      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
+      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "markdown":"
       Starting stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
       "}' https://api.ciscospark.com/v1/messages
   script:
@@ -33,7 +33,7 @@ build-aci:
   stage: build
   before_script:
     - >-
-      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
+      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "markdown":"
       Starting stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
       "}' https://api.ciscospark.com/v1/messages
   script:
@@ -49,7 +49,7 @@ notify_failure:
   when: on_failure
   script:
     - >-
-      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
+      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "markdown":"
       We have aborted pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"' \n The following issues have been found: \n\n
       "}' https://api.ciscospark.com/v1/messages
     - >-
@@ -60,6 +60,6 @@ notify_success:
   when: on_success
   script:
     - >-
-      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
+      curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "markdown":"
       Success on pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"'\n ################### \n\n
       "}' https://api.ciscospark.com/v1/messages
