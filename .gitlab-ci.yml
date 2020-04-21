@@ -53,7 +53,7 @@ notify_failure:
       We have aborted pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"' \n ################### \n\n
       "}' https://api.ciscospark.com/v1/messages
     - >-
-      python parser.py
+      python3 parser.py
 
 notify_success:
   stage: notify
