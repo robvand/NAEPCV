@@ -1,32 +1,29 @@
-import re
 import requests
-import os
 import json
-from json import JSONDecodeError
 
 #WebEx details
 roomId = "Y2lzY29zcGFyazovL3VzL1JPT00vYmMzNGIyZjAtNjFmYS0xMWVhLWI4NTgtMTM5NTgxNTJhYmNl"
-bearer = 'Bearer ODc5ZDVmZGUtM2Q0Yy00MzM3LTk2YmItYjlhYzZkNTZjN2VmYTk3ZjdlY2ItOTEx_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f'
+bearer = 'ODc5ZDVmZGUtM2Q0Yy00MzM3LTk2YmItYjlhYzZkNTZjN2VmYTk3ZjdlY2ItOTEx_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f'
 
-CI_PIPELINE_ID = os.getenv('CI_PIPELINE_ID')
+def post_message(message):
+    u = "https://api.ciscospark.com/v1/messages"
+    headers = {"Content-type": "application/json",
+               "Authorization": "Bearer {}".format(bearer)}
+    body = {"roomId": roomId,
+            "markdown": message}
+    return requests.post(u, headers=headers, data=json.dumps(body))
 
-pcv_output = open('output_101.txt', 'r').read()
-new_string = re.sub("\[\{", "", pcv_output)
+with open('results.json') as json_file:
+    data = json.load(json_file)
+    results = json.dumps(data, indent=4, sort_keys=True)
+    print(json.dumps(data["Later_Epoch_Smart_Events"][0]["epoch2_details"]["description"]))
 
-parsed_input_string = pcv_output[(pcv_output.find("Later Epoch Smart Events") - 7): pcv_output.find("PLAY RECAP") - 39]
-try:
-    output_dict = json.loads(parsed_input_string)
-    epoch_details = output_dict['Later Epoch Smart Events'][0]['epoch2_details']
-    epoch_details_desc = epoch_details['description']
-    epoch_details_mnemonic = epoch_details['mnemonic']
-except JSONDecodeError as e:
-    print(e)
-    output_dict = {"key":"value"}
-#text = " Description: {0}".format(output_dict['Later Epoch Smart Events'][0]['epoch2_details']['description'])
-
-print(output_dict)
-
-url = 'https://api.ciscospark.com/v1/messages'
-payload = {'roomId': roomId, 'text': "hi"}
-headers = {'Authorization': bearer}
-res = requests.post(url, data=payload, headers=headers)
+    message = []
+    message.append("****************")
+    message.append("    Description         : " + json.dumps(data["Later_Epoch_Smart_Events"][0]["epoch2_details"]["description"]))
+    message.append("    Mnemonic            : " + json.dumps(data["Later_Epoch_Smart_Events"][0]["epoch2_details"]["mnemonic"]))
+    message.append("    Event Severity      : " + json.dumps(data["Later_Epoch_Smart_Events"][0]["epoch2_details"]["severity"]))
+    message.append("    Category            : " + json.dumps(data["Later_Epoch_Smart_Events"][0]["category"]))
+    message.append("    Sub Category        : " + json.dumps(data["Later_Epoch_Smart_Events"][0]["epoch2_details"]["sub_category"]))
+    print(message)
+    post_resp = post_message("\n".join(message))
