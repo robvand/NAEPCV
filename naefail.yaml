@@ -45,6 +45,6 @@
       rescue:
       - debug:
           var: results
-      - copy: content="{{ results }}" dest=/results.json
+      - copy: content="{{ results }}" dest=/tmp/results.json
       - fail:
           msg: Results require us to abort executing the next pipeline stage. Thus aborting.
