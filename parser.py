@@ -16,7 +16,6 @@ def post_message(message):
 with open('/tmp/results.json') as json_file:
     data = json.load(json_file)
     results = json.dumps(data, indent=4, sort_keys=True)
-    print(json.dumps(data["Later_Epoch_Smart_Events"][0]["epoch2_details"]["description"]))
 
     message = []
     message.append("****************")
