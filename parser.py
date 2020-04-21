@@ -19,10 +19,10 @@ with open('/tmp/results.json') as json_file:
 
     message = []
     message.append("****************")
-    message.append("    Description         : " + json.dumps(data["Later_Epoch_Smart_Events"][0]["epoch2_details"]["description"]))
-    message.append("    Mnemonic            : " + json.dumps(data["Later_Epoch_Smart_Events"][0]["epoch2_details"]["mnemonic"]))
-    message.append("    Event Severity      : " + json.dumps(data["Later_Epoch_Smart_Events"][0]["epoch2_details"]["severity"]))
-    message.append("    Category            : " + json.dumps(data["Later_Epoch_Smart_Events"][0]["category"]))
-    message.append("    Sub Category        : " + json.dumps(data["Later_Epoch_Smart_Events"][0]["epoch2_details"]["sub_category"]))
+    message.append("    Description         : " + json.dumps(data["Later Epoch Smart Events"][0]["epoch2_details"]["description"]))
+    message.append("    Mnemonic            : " + json.dumps(data["Later Epoch Smart Events"][0]["epoch2_details"]["mnemonic"]))
+    message.append("    Event Severity      : " + json.dumps(data["Later Epoch Smart Events"][0]["epoch2_details"]["severity"]))
+    message.append("    Category            : " + json.dumps(data["Later Epoch Smart Events"][0]["category"]))
+    message.append("    Sub Category        : " + json.dumps(data["Later Epoch Smart Events"][0]["epoch2_details"]["sub_category"]))
     print(message)
     post_resp = post_message("\n".join(message))
