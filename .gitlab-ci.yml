@@ -50,7 +50,7 @@ notify_failure:
   script:
     - >-
       curl -H "Content-Type: application/json" -H 'Authorization: Bearer '"$bearer"'' -i -v -X POST -d ' {"roomId": "'"$roomId"'", "text":"
-      We have aborted pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"' \n ################### \n\n
+      We have aborted pipeline '"${CI_PIPELINE_URL}"' on branch '"${CI_COMMIT_REF_SLUG}"' \n The following issues have been found: \n\n
       "}' https://api.ciscospark.com/v1/messages
     - >-
       python3 parser.py
