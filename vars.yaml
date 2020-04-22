@@ -6,4 +6,5 @@ tenant: robvand
 vrf: vrf-cicd
 bd: BD-CORONA
 gateway: 10.0.31.1/24
+contract: to-common
 mask: 24
