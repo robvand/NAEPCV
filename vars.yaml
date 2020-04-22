@@ -5,5 +5,5 @@ validate_certs: no
 tenant: robvand
 vrf: vrf-cicd
 bd: BD-CORONA
-gateway: 10.0.28.1/24
+gateway: 10.0.32.1/24
 mask: 24
