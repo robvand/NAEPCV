@@ -1,8 +1,8 @@
 # Pipeline for ACI changes that contains PCVs and sends info message to WebEx room.
 
 variables:
-  bearer: "ODc5ZDVmZGUtM2Q0Yy00MzM3LTk2YmItYjlhYzZkNTZjN2VmYTk3ZjdlY2ItOTEx_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f"
-  roomId: "Y2lzY29zcGFyazovL3VzL1JPT00vYmMzNGIyZjAtNjFmYS0xMWVhLWI4NTgtMTM5NTgxNTJhYmNl"
+  bearer: ""
+  roomId: ""
 
 stages:
   - init-webex

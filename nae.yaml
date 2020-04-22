@@ -1,12 +1,12 @@
 - name: NAE pre-change analysis
-  hosts: candid-amslab.cisco.com
+  hosts:
   connection: local
   gather_facts: no
   vars:
     nae_login: &nae_login
-      hostname: candid-amslab.cisco.com
-      username: admin
-      password: C!sco1234567890
+      hostname:
+      username:
+      password:
       port: 443
       validate_certs: no
   tasks:
@@ -19,7 +19,7 @@
             [{
                   "bd_change": {
                      "action": "ADD",
-                     "dn": "uni/tn-robvand/BD-BD-CORONA",
+                     "dn": "uni/tn-robvand/BD-BD-A",
                      "optimize_wan_bandwidth": "no",
                      "type": "regular",
                      "arp_flood": "yes",
@@ -36,7 +36,7 @@
                  {
                    "network_subnet_change": {
                      "action": "ADD",
-                     "dn": "uni/tn-robvand/BD-BD-CORONA/subnet-10.0.12.1/24",
+                     "dn": "uni/tn-robvand/BD-BD-A/subnet-10.0.12.1/24",
                      "scope": "private",
                      "make_this_primary_ip_address": "no",
                      "treat_as_virtual_ip_address": "no",

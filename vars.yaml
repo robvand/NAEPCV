@@ -1,10 +1,10 @@
-hostname: 10.61.124.32
-username: admin
-password: C!sco12345
+hostname:
+username:
+password: 
 validate_certs: no
-tenant: robvand
-vrf: vrf-cicd
-bd: BD-CORONA
-gateway: 10.0.33.1/24
-contract: to-common
+tenant: 
+vrf: 
+bd: 
+gateway: 
+contract:
 mask: 24
