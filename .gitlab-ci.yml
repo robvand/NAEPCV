@@ -27,7 +27,7 @@ query:
       Starting stage: '"${CI_JOB_STAGE}"' with job ID: '"${CI_JOB_ID}"'
       "}' https://api.ciscospark.com/v1/messages
   script:
-    - ansible-playbook naefail.yaml -i hosts -vvv
+    - ansible-playbook nae.yaml -i hosts -vvv
 
 build-aci:
   stage: build

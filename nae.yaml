@@ -22,7 +22,7 @@
                      "dn": "uni/tn-robvand/BD-BD-CORONA",
                      "optimize_wan_bandwidth": "no",
                      "type": "regular",
-                     "arp_flood": "no",
+                     "arp_flood": "yes",
                      "ip_learning": "yes",
                      "limit_ip_learn_to_subnets": "yes",
                      "unk_mac_ucast_act": "proxy",
