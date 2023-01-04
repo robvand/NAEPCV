@@ -3,7 +3,7 @@ certifi==2018.11.29
 cryptography==3.3.2
 future==0.18.2
 paramiko==2.6.0
-PyYAML==5.1
+PyYAML==5.4
 requests==2.21.0
 requests-toolbelt==0.9.1
 urllib3==1.24.2
